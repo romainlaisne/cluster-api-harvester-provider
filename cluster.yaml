@@ -1,0 +1,30 @@
+# cluster.yaml
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: my-harvester-cluster
+  namespace: default
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks: ["192.168.0.0/16"]
+    services:
+      cidrBlocks: ["10.96.0.0/12"]
+  controlPlaneRef:
+    apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+    kind: KubeadmControlPlane
+    name: my-harvester-cluster-control-plane
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+    kind: HarvesterCluster
+    name: my-harvester-cluster
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: HarvesterCluster
+metadata:
+  name: my-harvester-cluster
+  namespace: default
+spec:
+  controlPlaneEndpoint:
+    host: "<HARVESTER_PUBLIC_IP>"
+    port: 6443
