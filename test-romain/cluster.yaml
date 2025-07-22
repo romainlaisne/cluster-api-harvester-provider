@@ -3,7 +3,7 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   name: my-harvester-cluster
-  namespace: default
+  namespace: fleet-default
 spec:
   clusterNetwork:
     pods:
@@ -23,8 +23,8 @@ apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: HarvesterCluster
 metadata:
   name: my-harvester-cluster
-  namespace: default
+  namespace: fleet-default
 spec:
   controlPlaneEndpoint:
-    host: "<HARVESTER_PUBLIC_IP>"
+    host: 185.173.162.158
     port: 6443
